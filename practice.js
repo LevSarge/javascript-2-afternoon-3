@@ -92,12 +92,10 @@ multiply(4, 3, function (answer) {
 
 function contains(arr, name, cb) {
   for (i = 0; i < arr.length; i++) {
-    for (var name in arr) {
-      if (name === true) {
-        return cb(true)
-      } else {
-        return cb(false)
-      }
+    if (arr[i] === name) {
+      return cb(true)
+    } else {
+      return cb(false)
     }
   }
 }
@@ -122,6 +120,7 @@ contains(names, 'Colt', function (result) {
 */
 
 function uniq(arr, theCoolestFunctionEver) {
+  /*function removeDuplicate(){}
   for (let i = 0; i < arr.length; i++) {
     for (let j = 1; j < arr.length; j++) {
       if (arr[i] === arr[j]) {
@@ -129,8 +128,21 @@ function uniq(arr, theCoolestFunctionEver) {
       }
     }
   }
-  theCoolestFunctionEver(arr)
-}
+  theCoolestFunctionEver(arr)*/
+  function getArrayWithNoDuplicates(arr) {
+    const set = new Set();
+  
+    for(let i =0; i < arr.length; i++) {
+      const item = arr[i];
+      set.add(item);
+    }
+  
+    return Array.from(set);
+  }
+  
+    const arrNoDuplicates = getArrayWithNoDuplicates(arr)
+      theCoolestFunctionEver(arrNoDuplicates);
+  }
 
 // Do not edit the code below.
 uniq(names, function (uniqArr) {
@@ -149,7 +161,7 @@ uniq(names, function (uniqArr) {
 
 function each(arr, cb) {
   for (i = 0; i < arr.length; i++) {
-    cb(arr[i])
+    cb (arr[i], i)
   }
 }
 
@@ -171,9 +183,11 @@ each(names, function (item, indice) {
 
 function getUserById(arr, id, cb) {
   for (i = 0; i < arr.length; i++) {
-    if (id === true) {
-      cb(arr, id)
-    } else return false
+    let currentUser = arr[i]
+    let currentUserId = currentUser.id
+    if (id === currentUserId) {
+      cb(currentUser)
+    }
   }
 }
 
